@@ -1,6 +1,8 @@
 # price_prediction is the algorithm function file that is used for 
 # predict product price by linear regression.
 import warnings
+
+from algorithms.price_prediction_random_forest import random_forest_prediction
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
@@ -12,7 +14,7 @@ from algorithms.price_prediction_ridge import ridge_regression
 from algorithms.price_prediction_svm import svm_prediction
 
 
-def predict_product_price(sales : pd.DataFrame, intent_products : pd.DataFrame, algorithm = "LINEAR_REGRESSION") -> pd.DataFrame:
+def predict_product_price(sales : pd.DataFrame, intent_products : pd.DataFrame, algorithm = "RANDOM_FOREST") -> pd.DataFrame:
     """
     Predict product price.
     """
@@ -36,6 +38,9 @@ def predict_product_price(sales : pd.DataFrame, intent_products : pd.DataFrame, 
         elif algorithm == "SVM":
             # support vector machine
             predicted_price = svm_prediction(sales_for_specific_product)
+        elif algorithm == "RANDOM_FOREST":
+            # support vector machine
+            predicted_price = random_forest_prediction(sales_for_specific_product)
 
         # add predicted price (append is deprecated) use concat
         # get predicted price max value

@@ -3,6 +3,7 @@ import time
 
 from pandas import DataFrame
 from algorithms.price_prediction import predict_product_price
+from algorithms.product_recommendation import predict_basket_new_item
 from dataset_preparation.clustering import data_clustering
 from dataset_preparation.preprocessing import data_preprocessing
 
@@ -21,7 +22,6 @@ def main():
     # get process working directory and data folder
     working_dir = os.getcwd()
     data_dir = os.path.join(working_dir, 'data')
-    """
 
     # read datas from csv files using pandas then assign into variables
     print("Reading data from csv files...")
@@ -50,11 +50,17 @@ def main():
     random_products = pre_content_products_df.iloc[38:47]
     random_products = DataFrame(random_products)
     print("\n\n")
-    content_predicted = predict_product_price(pre_content_sales_df,random_products)
+    # content_predicted = predict_product_price(pre_content_sales_df,random_products)
     print("Predicting product price completed.")
 
     # 5 - algorithms -- generate knn model to predict product basket recommendation.
-    """
+    # groupby sales by FISNO and get all URUNREF's in each group
+    bills = pre_content_sales_df.groupby(["FISNO"]).sum()
+    bills = bills.reset_index()
+    
+
+    
+
 
 
     # 6 - gui -- generate gui
